@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Selfie Verification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { font-family: Arial; background:#000; color:white; text-align:center; padding:40px; }
+video, canvas { width:100%; max-width:360px; border-radius:12px; margin-top:15px; }
+button { margin-top:15px; padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:#25D366; color:white; }
+</style>
+</head>
+<body>
+<h2>📸 Selfie Verification</h2>
+<p>Please allow camera and take a selfie</p>
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas" style="display:none;"></canvas>
+<br>
+<button id="captureBtn">Capture Selfie</button>
+<button id="continueBtn" style="display:none;">Continue</button>
+
+<script>
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const captureBtn = document.getElementById("captureBtn");
+const continueBtn = document.getElementById("continueBtn");
+
+// Access camera
+navigator.mediaDevices.getUserMedia({ video:{ facingMode:"user" }, audio:false })
+.then(stream => { video.srcObject = stream; })
+.catch(() => { alert("Camera permission required"); });
+
+// Capture selfie
+captureBtn.onclick = () => {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext("2d").drawImage(video,0,0);
+  video.style.display = "none";
+  canvas.style.display = "block";
+  captureBtn.style.display = "none";
+  continueBtn.style.display = "inline-block";
+};
+
+// Store selfie in localStorage & continue
+continueBtn.onclick = () => {
+  const selfieData = canvas.toDataURL("image/png");
+  localStorage.setItem("userSelfie", selfieData);
+  window.location.href='countdown.html';
+};
+</script>
+</body>
+</html>
