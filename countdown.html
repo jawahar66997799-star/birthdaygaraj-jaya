@@ -1,31 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Countdown</title>
+<title>SECURITY BREACH WARNING</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body { font-family: Arial; background:#111; color:white; text-align:center; padding:50px; }
-#timer { font-size:60px; margin:30px 0; color:#25D366; }
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  color: red;
+  font-family: "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  animation: blink 1s infinite;
+}
+
+p {
+  font-size: 18px;
+  color: #ff5555;
+}
+
+#countdown {
+  margin-top: 30px;
+  font-size: 90px;
+  color: yellow;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
 </style>
 </head>
 <body>
-<h2>⏳ Countdown to Fun Page</h2>
-<p>Your fun page will open after the countdown.</p>
-<div id="timer">60</div>
+
+<h1>⚠️ SYSTEM BREACH DETECTED ⚠️</h1>
+<p>Unauthorized access in progress...</p>
+<p>Time remaining before data loss:</p>
+
+<div id="countdown">60</div>
 
 <script>
-let timeLeft = 60;
-const timerEl = document.getElementById('timer');
+let seconds = 60;
+const el = document.getElementById("countdown");
 
-const countdown = setInterval(() => {
-  timeLeft--;
-  timerEl.innerText = timeLeft;
-  if(timeLeft <= 0){
-    clearInterval(countdown);
-    window.location.href = 'final.html';
+const timer = setInterval(() => {
+  seconds--;
+  el.textContent = seconds;
+
+  if (seconds <= 0) {
+    clearInterval(timer);
+    window.location.href = "final.html";
   }
 }, 1000);
 </script>
+
 </body>
 </html>
